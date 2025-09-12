@@ -12,6 +12,7 @@
     "hardhat": "^2.26.0"
   },
   "dependencies": {
-    "ethers": "^6.15.0"
+    "ethers": "^6.15.0",
+    "lucide-react": "^0.544.0"
   }
 }
