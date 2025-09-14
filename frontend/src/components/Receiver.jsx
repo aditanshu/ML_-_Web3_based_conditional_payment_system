@@ -17,14 +17,14 @@ function Receiver({ currentAccount }) {
   const fetchDetails = async () => {
     if (!window.ethereum) return alert("MetaMask required!");
     try {
-      const provider = new ethers.BrowserProvider(window.ethereum);
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
       const contract = new ethers.Contract(CONTRACT_ADDRESS, contractABI.abi, provider);
 
       const res = await contract.getDetails();
       const parsed = {
         payer: res[0],
         payee: res[1],
-        amount: ethers.formatEther(res[2]),
+        amount: ethers.utils.formatEther(res[2]),
         condition: res[3],
         isPaid: res[4],
       };

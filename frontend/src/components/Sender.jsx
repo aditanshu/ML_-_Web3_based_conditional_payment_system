@@ -19,8 +19,8 @@ const savePayment = async () => {
 
   try {
     // FIX: No 'new' keyword
-    const provider = new ethers.BrowserProvider(window.ethereum);
-    const signer = await provider.getSigner();
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
 
     const factory = new ethers.ContractFactory(
       contractABI.abi,
@@ -30,16 +30,16 @@ const savePayment = async () => {
 
     const deployed = await factory.deploy(
       receiver,
-      ethers.parseEther(amount),
+      ethers.utils.parseEther(amount),
       condition,
-      { value: ethers.parseEther(amount) }
+      { value: ethers.utils.parseEther(amount) }
     );
 
-    await deployed.waitForDeployment();
-    console.log("Deployed at:", await deployed.getAddress());
+    await deployed.deployed();
+    console.log("Deployed at:", deployed.address);
 
     setContract(deployed);
-    alert(`Contract deployed at ${await deployed.getAddress()}`);
+    alert(`Contract deployed at ${deployed.address}`);
   } catch (err) {
     console.error("Error deploying contract:", err);
     alert("Deployment failed: " + err.message);

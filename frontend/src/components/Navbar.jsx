@@ -11,11 +11,11 @@ function Navbar({ currentAccount, connectWallet, disconnectWallet, activeTab, se
     async function fetchDetails() {
       if (window.ethereum && currentAccount) {
         try {
-          const provider = new ethers.BrowserProvider(window.ethereum);
+          const provider = new ethers.providers.Web3Provider(window.ethereum);
           const bal = await provider.getBalance(currentAccount);
           const networkInfo = await provider.getNetwork();
 
-          setBalance(Number(ethers.formatEther(bal))); // ✅ safe parse
+          setBalance(Number(ethers.utils.formatEther(bal))); // ✅ safe parse
           setNetwork(networkInfo.name); // e.g., "sepolia"
         } catch (err) {
           console.error("Error fetching wallet details:", err);
