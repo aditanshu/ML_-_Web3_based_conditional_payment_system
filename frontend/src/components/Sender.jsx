@@ -18,9 +18,8 @@ const savePayment = async () => {
   if (isNaN(Number(amount)) || Number(amount) <= 0) return alert("Invalid amount");
 
   try {
-    // FIX: No 'new' keyword
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const signer = await provider.getSigner();
 
     const factory = new ethers.ContractFactory(
       contractABI.abi,
@@ -30,16 +29,16 @@ const savePayment = async () => {
 
     const deployed = await factory.deploy(
       receiver,
-      ethers.utils.parseEther(amount),
+      ethers.parseEther(amount),
       condition,
-      { value: ethers.utils.parseEther(amount) }
+      { value: ethers.parseEther(amount) }
     );
 
-    await deployed.deployed();
-    console.log("Deployed at:", deployed.address);
+    await deployed.waitForDeployment();
+    console.log("Deployed at:", await deployed.getAddress());
 
     setContract(deployed);
-    alert(`Contract deployed at ${deployed.address}`);
+    alert(`Contract deployed at ${await deployed.getAddress()}`);
   } catch (err) {
     console.error("Error deploying contract:", err);
     alert("Deployment failed: " + err.message);
