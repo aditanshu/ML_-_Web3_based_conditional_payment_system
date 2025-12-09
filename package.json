@@ -1,13 +1,17 @@
 {
   "name": "web3_based_conditional_payment_system",
   "version": "1.0.0",
-  "type": "module",
   "scripts": {
     "compile": "hardhat compile",
-    "test": "hardhat test"
+    "test": "hardhat test",
+    "test:gas": "REPORT_GAS=true hardhat test",
+    "deploy:local": "hardhat run scripts/deployUPI.cjs --network localhost",
+    "deploy:sepolia": "hardhat run scripts/deployUPI.cjs --network sepolia",
+    "node": "hardhat node"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@openzeppelin/contracts": "^5.1.0",
     "dotenv": "^17.2.1",
     "hardhat": "^2.26.0"
   },

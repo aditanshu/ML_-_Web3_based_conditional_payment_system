@@ -1,2 +1,33 @@
+# Dependencies
 node_modules
+frontend/node_modules
+relayer/node_modules
+
+# Environment files
 .env
+backend/.env
+relayer/.env
+
+# Build artifacts
+artifacts/
+cache/
+frontend/dist/
+
+# Data files
+relayer/db.json
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Keep deployment artifacts
+!deployments/*.json
+!deployments/.gitkeep
