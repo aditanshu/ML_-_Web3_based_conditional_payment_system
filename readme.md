@@ -273,7 +273,7 @@ node index.js
 
 ### Next Steps (Phase 3)
 
-* Frontend integration with React
+* Frontend integration with React v19
 * Dynamic condition creation and evaluation
 * Transaction UI feedback
 * Real-time status updates for conditional payments
